@@ -5,8 +5,8 @@ Add `Fahh` sound trigger to your Windows Terminal (PowerShell) whenever you type
 ## 1. Clone the Repo
 ### PowerShell
 ```
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/PrakharG8651/Fahh.git
+cd Fahh
 ```
 ## 2. Install
 
