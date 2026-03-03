@@ -1,9 +1,8 @@
-# Get the absolute path to the sound file relative to where this script is saved
 $soundPath = Join-Path -Path $PSScriptRoot -ChildPath "assets\Sound.wav"
 
 $triggerCode = @"
 
-# --- Added by Windows Terminal Error Sounds ---
+# --- START-ERROR-SOUND ---
 `$ExecutionContext.InvokeCommand.CommandNotFoundAction = {
     param(`$commandName, `$commandLookupEventArgs)
     try {
@@ -13,11 +12,9 @@ $triggerCode = @"
     Write-Error "The term '`$commandName' is not recognized."
     `$commandLookupEventArgs.StopSearch = `$true
 }
-# ----------------------------------------------
+# --- END-ERROR-SOUND ---
 "@
 
-# Append to the current user's profile
 if (!(Test-Path $PROFILE)) { New-Item -Path $PROFILE -Type File -Force }
 Add-Content -Path $PROFILE -Value $triggerCode
-
-Write-Host "Installation complete! Restart Terminal to hear the sound." -ForegroundColor Green
+Write-Host "Installed successfully! Restart Terminal to test." -ForegroundColor Green
