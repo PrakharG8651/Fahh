@@ -8,9 +8,17 @@ if (Test-Path $profilePath) {
     
     if ($content -match $pattern) {
         $newContent = $content -replace $pattern, ""
-        # Clean up extra whitespace and save
+        
+        # This part is CRUCIAL: 
+        # Since we modified the 'prompt' function, we need to tell 
+        # PowerShell to go back to the default prompt if it's currently loaded.
+        if (Test-Path function:\prompt) {
+            Remove-Item function:\prompt -ErrorAction SilentlyContinue
+        }
+
+        # Clean up and save
         $newContent.Trim() | Set-Content $profilePath
-        Write-Host "Uninstalled successfully! Restart your terminal to apply changes." -ForegroundColor Cyan
+        Write-Host "Uninstalled successfully! Restart your terminal to restore the default prompt." -ForegroundColor Cyan
     } else {
         Write-Host "Could not find the error sound code in your profile." -ForegroundColor Yellow
     }
